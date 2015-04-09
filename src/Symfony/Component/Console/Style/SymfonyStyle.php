@@ -302,6 +302,17 @@ class SymfonyStyle extends OutputStyle
     }
 
     /**
+     * @return int
+     */
+    protected function getTerminalWidth()
+    {
+        $application = new Application();
+        $dimensions = $application->getTerminalDimensions();
+
+        return $dimensions[0] ?: self::MAX_LINE_LENGTH;
+    }
+
+    /**
      * @return ProgressBar
      */
     private function getProgressBar()
@@ -313,11 +324,5 @@ class SymfonyStyle extends OutputStyle
         return $this->progressBar;
     }
 
-    private function getTerminalWidth()
-    {
-        $application = new Application();
-        $dimensions = $application->getTerminalDimensions();
 
-        return $dimensions[0] ?: self::MAX_LINE_LENGTH;
-    }
 }
